@@ -1,4 +1,4 @@
-import type { Extension } from "../type";
+import type { Extension } from "../types";
 import ToggleSwitch from "./ToggleSwitch";
 
 type ExtensionCardProps = {

@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import FilterBar from "./components/FilterBar";
 import ExtensionCard from "./components/ExtensionCard";
 import { initialExtensions } from "./data/extensions";
-import type { Filter } from "./types";
+import type { Filter } from "../types";
 
 function App() {
   // the full list of extensions, this is the "source of truth"
