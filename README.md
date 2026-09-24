@@ -1,78 +1,48 @@
-# React + TypeScript + Vite
+# Frontend Mentor - Browser extensions manager UI solution
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my solution to the [Browser extensions manager UI challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/browser-extension-manager-ui-yzSJ-y_p7p). This was for my class - my mentor wanted to see React and TypeScript specifically for this one, with Tailwind for the styling like usual.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### The challenge
 
-## React Compiler
+Users should be able to:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- Toggle extensions between active and inactive states
+- Filter extensions by All / Active / Inactive
+- Remove extensions from the list
+- Switch between light and dark theme
+- Get a layout that works well on mobile and desktop
+- See hover and focus states on everything clickable
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+### Links
 
-## Expanding the ESLint configuration
+- Solution URL: (add your repo link here)
+- Live Site URL: (add your deployed link here)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## My process
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Built with
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React (with Vite)
+- TypeScript
+- Tailwind CSS
+- Mobile-first layout
+- useState for the extensions list, the active filter, and the theme
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### What I learned
 
-```
+This was my first time using TypeScript with React. The main difference from plain JS is that i had to describe the "shape" of my data up front - like, an extension always has an `id`, a `logo`, a `name`, a `description`, and `isActive` (true or false). I put that in a file called `types.ts`. Once that's defined, TypeScript will warn me in my editor if I ever try to use an extension that's missing a field or has the wrong type in it, instead of only finding out when the app breaks in the browser.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+I split it into these pieces:
+- `Header` - logo, title, and the light/dark toggle button
+- `FilterBar` - the "Extensions List" heading plus the All/Active/Inactive buttons
+- `ExtensionCard` - one single extension: logo, name, description, remove button, toggle switch
+- `ToggleSwitch` - a small reusable on/off switch, it's really just a styled checkbox
+- `App` - holds all the state (the list itself, which filter is picked, dark mode on/off) and passes it down to the others
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+For dark mode, I used a bit of Tailwind's newer setup that lets a `dark` class control the theme instead of only following the device's setting, so the toggle button actually works.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Continued development
 
-```
+Next I want to get more comfortable writing TypeScript types myself instead of asking for help with them, and maybe look into saving the theme choice so it doesn't reset when the page reloads.
