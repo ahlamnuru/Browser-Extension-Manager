@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { initialExtensions } from "./extension";
+import { initialExtensions } from "./extensions";
 import Header from "../components/Header";
 import FilterBar from "../components/FilterBar";
 import ExtensionCard from "../components/ExtensionCard";
 
 function App() {
+
+  type Filter = "all" | "active" | "inactive";
   // the full list of extensions, this is the "source of truth"
   const [extensions, setExtensions] = useState(initialExtensions);
 
@@ -14,14 +16,15 @@ function App() {
   // whether dark mode is on
   const [isDark, setIsDark] = useState(false);
 
-  // flip one extension's isActive value on/off
-  function handleToggleActive(id: number) {
-    setExtensions((prev) =>
-      prev.map((ext) =>
-        ext.id === id ? { ...ext, isActive: !ext.isActive } : ext
-      )
-    );
-  }
+const handleToggle = (id: number) => {
+  setExtensions((prev) =>
+    prev.map((ext) =>
+      ext.id === id
+        ? { ...ext, isActive: !ext.isActive }
+        : ext
+    )
+  );
+};
 
   // remove one extension from the list completely
   function handleRemove(id: number) {
@@ -51,7 +54,7 @@ function App() {
                 <ExtensionCard
                   key={extension.id}
                   extension={extension}
-                  onToggleActive={handleToggleActive}
+                  onToggleActive={handleToggle}
                   onRemove={handleRemove}
                 />
               ))}

@@ -1,6 +1,6 @@
-import logo from "../assets/images/logo.svg";
-import iconSun from "../assets/images/icon-sun.svg";
-import iconMoon from "../assets/images/icon-moon.svg";
+import logo from "../images/logo.svg";
+import iconSun from "../images/icon-sun.svg";
+import iconMoon from "../images/icon-moon.svg";
 
 type HeaderProps = {
   isDark: boolean;
@@ -11,10 +11,7 @@ function Header({ isDark, onToggleTheme }: HeaderProps) {
   return (
     <header className="flex items-center justify-between rounded-2xl bg-neutral-0 p-4 shadow-sm dark:bg-neutral-800">
       <div className="flex items-center gap-3">
-        <img src={logo} alt="" className="h-8 w-8" />
-        <span className="text-lg font-bold text-neutral-900 dark:text-neutral-0">
-          Extensions
-        </span>
+        <img src={logo} alt="" className="h-8 " />
       </div>
 
       <button
